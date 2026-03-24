@@ -1,0 +1,38 @@
+{
+  "name": "toolrelay-api",
+  "version": "1.0.0",
+  "description": "Universal tool-execution proxy and registry API for AI agent developers",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "test": "jest --passWithNoTests"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    "stripe": "^14.7.0",
+    "uuid": "^9.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
+    "axios": "^1.6.2",
+    "zod": "^3.22.4",
+    "winston": "^3.11.0",
+    "prom-client": "^15.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17",
+    "@types/uuid": "^9.0.7",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20.10.4",
+    "typescript": "^5.3.3",
+    "ts-node-dev": "^2.0.0",
+    "jest": "^29.7.0"
+  }
+}
