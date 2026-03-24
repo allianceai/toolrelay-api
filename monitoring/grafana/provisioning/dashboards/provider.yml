@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: 'ToolRelay'
+    orgId: 1
+    folder: 'ToolRelay'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    options:
+      path: /var/lib/grafana/dashboards
