@@ -1,0 +1,39 @@
+groups:
+  - name: toolrelay-api
+    interval: 30s
+    rules:
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High error rate on ToolRelay API"
+          description: "Error rate is {{ $value | humanizePercentage }} over the last 5 minutes"
+
+      - alert: HighLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_ms_bucket[5m])) > 5000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High p95 latency on ToolRelay API"
+          description: "p95 latency is {{ $value }}ms"
+
+      - alert: APIDown
+        expr: up{job="toolrelay-api"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "ToolRelay API is down"
+          description: "The API has been unreachable for more than 1 minute"
+
+      - alert: HighExecutionFailureRate
+        expr: rate(toolrelay_executions_total{status="error"}[10m]) / rate(toolrelay_executions_total[10m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High tool execution failure rate"
+          description: "Execution failure rate is {{ $value | humanizePercentage }}"
